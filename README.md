@@ -1,8 +1,7 @@
 # Vanguard - Modern Full-Stack Boilerplate dengan Go dan React
-Boilerplate full-stack Go dan React dengan integrasi RBAC
 
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![Go](https://img.shields.io/badge/Go-v1.24-blue.svg)
+![Go](https://img.shields.io/badge/Go-v1.20+-blue.svg)
 ![Gin](https://img.shields.io/badge/Gin-v1.9+-darkblue.svg)
 ![GORM](https://img.shields.io/badge/GORM-v1.25+-brightgreen.svg)
 ![Zerolog](https://img.shields.io/badge/Zerolog-v1.30+-green.svg)
@@ -105,3 +104,103 @@ Dari direktori `backend`:
 
 ```bash
 go run main.go
+```
+
+Backend akan berjalan di `http://localhost:<PORT_BACKEND_ANDA>` (lihat konfigurasi `.env`).
+
+#### Menjalankan Frontend
+
+Dari direktori `frontend`:
+
+```bash
+npm run dev
+# atau
+yarn dev
+```
+
+Frontend akan berjalan di `http://localhost:<PORT_FRONTEND_ANDA>` (biasanya 3000 atau 5173).
+
+#### Menjalankan Backend dan Frontend Bersamaan (Contoh dengan `concurrently` atau skrip terpisah)
+
+Anda dapat menggunakan `concurrently` (jika diinstal secara global atau sebagai dev dependency) atau menjalankan perintah di terminal yang berbeda.
+
+**Dengan `concurrently`:**
+
+Dari direktori root proyek, instal jika belum ada:
+
+```bash
+npm install -D concurrently
+# atau
+yarn add -D concurrently
+```
+
+Kemudian, tambahkan skrip di `package.json` root:
+
+```json
+"scripts": {
+  "dev": "concurrently \"cd backend && go run main.go\" \"cd frontend && npm run dev\""
+}
+```
+
+Lalu jalankan:
+
+```bash
+npm run dev
+# atau
+yarn dev
+```
+
+## Struktur Proyek
+
+```
+vanguard/
+├── backend/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── go.mod
+│   ├── go.sum
+│   ├── main.go
+│   ├── config/
+│   ├── controllers/
+│   ├── database/
+│   ├── middlewares/
+│   ├── models/
+│   ├── routes/
+│   └── utils/
+├── frontend/
+│   ├── .env.example
+│   ├── .gitignore
+│   ├── index.html
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   ├── tsconfig.json
+│   ├── vite.config.ts
+│   └── yarn.lock
+├── .gitignore
+└── README.md
+```
+
+## Konfigurasi RBAC
+
+Implementasi RBAC dasar dapat ditemukan di direktori `backend/middlewares/rbac` dan mungkin terkait dengan model `User` dan `Role` di `backend/models`. Anda perlu menyesuaikan definisi peran, izin, dan logika middleware sesuai dengan kebutuhan aplikasi Anda.
+
+## Deployment
+
+Panduan deployment akan ditambahkan di masa mendatang. Secara umum, Anda dapat mempertimbangkan opsi seperti:
+
+* **Docker:** Containerize backend dan frontend untuk deployment yang mudah.
+* **Platform Cloud:** Deploy backend ke platform seperti Heroku, AWS, Google Cloud, atau Azure, dan frontend ke platform seperti Netlify atau Vercel.
+
+## Kontribusi
+
+Kontribusi dipersilakan! Jika Anda menemukan bug atau memiliki ide untuk fitur baru, jangan ragu untuk membuka issue atau mengirimkan pull request.
+
+## Lisensi
+
+[MIT](https://opensource.org/licenses/MIT)
+
+---
+
+**Vanguard** - Membangun masa depan aplikasi web yang aman dan efisien.
+```
